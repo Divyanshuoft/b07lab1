@@ -17,17 +17,30 @@ public class Polynomial {
         int h1 = 0;
         int looper = 0;
         if(this.Coefficients.length <= inp.Coefficients.length) h1 = 1;
-        if(h1 == 0){
+        // declare the output array
+        if(h1 == 0){ // This length is the bigger one 
             looper = inp.Coefficients.length;
+            double [] out = new double [this.Coefficients.length];
             for(int i = 0; i < looper; i++){
-                this.Coefficients[i] += inp.Coefficients[i];
+                // change the output instances
+                out[i] = inp.Coefficients[i] + this.Coefficients[i];
             }
-            return this;
+            for(int h = looper; h < this.Coefficients.length; h++){
+                out[h] = this.Coefficients[h];
+            }
+            Polynomial k = new Polynomial(out);
+            return k;
         }
-        for(int j = 0; j < this.Coefficients.length; j++){
-            inp.Coefficients[j] += this.Coefficients[j];
+        looper = this.Coefficients.length;
+        double [] out = new double [inp.Coefficients.length];
+        for(int j = 0; j < looper; j++){
+            out[j] = inp.Coefficients[j] + this.Coefficients[j];
         }
-        return inp;
+        for(int h = looper; h < inp.Coefficients.length; h++){
+            out[h] += inp.Coefficients[h];
+        }
+        Polynomial z = new Polynomial(out);
+        return z;
     }
     public double evaluate(double input){
         double result = 0;
